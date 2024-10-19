@@ -30,6 +30,7 @@ async fn main() -> std::io::Result<()> {
             .route("/items", web::get().to(handlers::read_items))
             .route("/items/{id}", web::get().to(handlers::read_item))
             .route("/items/{id}", web::put().to(handlers::update_item))
+            .route("/items/{id}", web::delete().to(handlers::delete_item))
         )
     })
     .bind("127.0.0.1:8080")?        

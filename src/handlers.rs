@@ -70,3 +70,14 @@ pub async fn update_item(pool: web::Data<MySqlPool>, path: web::Path<i32>, item:
         Err(_) => HttpResponse::BadRequest().finish(),
     }
 }
+
+pub async fn delete_item(pool: web::Data<MySqlPool>, path: web::Path<i32>) -> impl Responder {
+    let id = path.into_inner();
+    match sqlx::query!("DELETE FROM item WHERE id = ?", id)
+        .execute(pool.get_ref())
+        .await
+    {
+        Ok(_) => HttpResponse::NoContent().finish(),
+        Err(_) => HttpResponse::BadRequest().finish(),
+    }
+}
