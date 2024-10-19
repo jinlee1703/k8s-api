@@ -41,7 +41,7 @@ pub async fn read_items(pool: web::Data<MySqlPool>) -> impl Responder {
                 .collect();
             HttpResponse::Ok().json(items)
         }
-        Err(_) => HttpResponse::InternalServerError().finish(),
+        Err(_) => HttpResponse::BadRequest().finish(),
     }
 }
 
@@ -56,6 +56,17 @@ pub async fn read_item(pool: web::Data<MySqlPool>, path: web::Path<i32>) -> impl
             name: row.name,
         }),
         Ok(None) => HttpResponse::NotFound().finish(),
-        Err(_) => HttpResponse::InternalServerError().finish(),
+        Err(_) => HttpResponse::BadRequest().finish(),
+    }
+}
+
+pub async fn update_item(pool: web::Data<MySqlPool>, path: web::Path<i32>, item: web::Json<Item>) -> impl Responder {
+    let id = path.into_inner();
+    match sqlx::query!("UPDATE item SET name = ? WHERE id = ?", item.name, id)
+        .execute(pool.get_ref())
+        .await
+    {
+        Ok(_) => HttpResponse::NoContent().finish(),
+        Err(_) => HttpResponse::BadRequest().finish(),
     }
 }
