@@ -26,6 +26,7 @@ async fn main() -> std::io::Result<()> {
         .app_data(web::Data::new(pool.clone()))
         .service(web::scope("/api")
             .route("/health", web::get().to(handlers::health_check))
+            .route("/items", web::post().to(handlers::create_item))
         )
     })
     .bind("127.0.0.1:8080")?        
