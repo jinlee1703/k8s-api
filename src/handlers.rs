@@ -44,3 +44,18 @@ pub async fn read_items(pool: web::Data<MySqlPool>) -> impl Responder {
         Err(_) => HttpResponse::InternalServerError().finish(),
     }
 }
+
+pub async fn read_item(pool: web::Data<MySqlPool>, path: web::Path<i32>) -> impl Responder {
+    let id = path.into_inner();
+    match sqlx::query!("SELECT id, name FROM item WHERE id = ?", id)
+        .fetch_optional(pool.get_ref())
+        .await
+    {
+        Ok(Some(row)) => HttpResponse::Ok().json(Item {
+            id: Some(row.id),
+            name: row.name,
+        }),
+        Ok(None) => HttpResponse::NotFound().finish(),
+        Err(_) => HttpResponse::InternalServerError().finish(),
+    }
+}
