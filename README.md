@@ -65,4 +65,9 @@ cargo run
 
 ## API Endpoints
 
-...
+- `GET` `/api/health`: 헬스 체크 API
+- `GET` `/api/items`: 모든 항목 조회
+- `POST` `/api/items`: 새 항목 생성
+- `GET` `/api/items/{id}`: 특정(id) 항목 조회
+- `PUT` `/api/items/{id}`: 특정(id) 항목 수정
+- `DELETE` `/api/items/{id}`: 특정(id) 항목 삭제

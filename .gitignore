@@ -1,5 +1,6 @@
 ### RUSK ###
 /target
+.env
 
 ### Node ###
 /node_modules
