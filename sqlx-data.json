@@ -1,0 +1,109 @@
+{
+  "db": "MySQL",
+  "3413b07e5a3c6c0ac8c2c84e54ab5ec221ebc6e018686216401c62a54a84a1f1": {
+    "describe": {
+      "columns": [
+        {
+          "name": "id",
+          "ordinal": 0,
+          "type_info": {
+            "char_set": 63,
+            "flags": {
+              "bits": 515
+            },
+            "max_size": 11,
+            "type": "Long"
+          }
+        },
+        {
+          "name": "name",
+          "ordinal": 1,
+          "type_info": {
+            "char_set": 224,
+            "flags": {
+              "bits": 4097
+            },
+            "max_size": 1020,
+            "type": "VarString"
+          }
+        }
+      ],
+      "nullable": [
+        false,
+        false
+      ],
+      "parameters": {
+        "Right": 1
+      }
+    },
+    "query": "SELECT id, name FROM item WHERE id = ?"
+  },
+  "b301498ce59d42961f9d35f21bbbf181f5d7419806ba599683698ae088244593": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Right": 1
+      }
+    },
+    "query": "INSERT INTO item (name) VALUES (?)"
+  },
+  "cbecd13f4b5538c500b226495c4e6be7d19aabc3605c51a4503abdd9822d9f4c": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Right": 1
+      }
+    },
+    "query": "DELETE FROM item WHERE id = ?"
+  },
+  "ed94413c27053dd4dae87e1249c7c9d398dead1d0cf5a7cc3958947a673c1468": {
+    "describe": {
+      "columns": [
+        {
+          "name": "id",
+          "ordinal": 0,
+          "type_info": {
+            "char_set": 63,
+            "flags": {
+              "bits": 515
+            },
+            "max_size": 11,
+            "type": "Long"
+          }
+        },
+        {
+          "name": "name",
+          "ordinal": 1,
+          "type_info": {
+            "char_set": 224,
+            "flags": {
+              "bits": 4097
+            },
+            "max_size": 1020,
+            "type": "VarString"
+          }
+        }
+      ],
+      "nullable": [
+        false,
+        false
+      ],
+      "parameters": {
+        "Right": 0
+      }
+    },
+    "query": "SELECT id, name FROM item"
+  },
+  "fd61ed53dd167791dda60f2d891355e62e9b5cb5ccbf45e9f42fe003960e3d05": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Right": 2
+      }
+    },
+    "query": "UPDATE item SET name = ? WHERE id = ?"
+  }
+}

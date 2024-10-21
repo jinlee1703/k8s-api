@@ -1,13 +1,10 @@
-FROM rust:1.82.0 as builder
+FROM rust:1.82 as builder
+
 WORKDIR /usr/src/app
-COPY Cargo.toml Cargo.lock ./
-RUN mkdir src && echo "fn main() {}" > src/main.rs
-RUN cargo build --release
-RUN rm -f target/release/deps/k8s_api*
 COPY . .
+ENV SQLX_OFFLINE=true
 RUN cargo build --release
 
-FROM debian:bullseye-slim
-RUN apt-get update && apt-get install -y libssl-dev && rm -rf /var/lib/apt/lists/*
-COPY --from=builder /usr/src/app/target/release/k8s-api /usr/local/bin/
+FROM rust:1.82-slim
+COPY --from=builder /usr/src/app/target/release/k8s-api /usr/local/bin/k8s-api
 CMD ["k8s-api"]
